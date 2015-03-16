@@ -1,3 +1,5 @@
 *.coffee
 node_modules/
 tests/
+.editorconfig
+.travis*
