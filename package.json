@@ -1,10 +1,10 @@
 {
   "name": "slack-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A collection of scripts for interacting with the various Slack APIs",
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register --timeout 5s test/outgoing.coffee test/*.coffee",
-    "prepublish": "coffee -c *.coffee"
+    "prepublish": "./node_modules/.bin/coffee -c *.coffee"
   },
   "keywords": [
     "slack",
@@ -16,7 +16,6 @@
   "author": "Abhay Rana <me@captnemo.in>",
   "license": "MIT",
   "dependencies": {
-    "coffee-script": "^1.9.1",
     "request": "^2.53.0",
     "ws": "^0.7.1"
   },
