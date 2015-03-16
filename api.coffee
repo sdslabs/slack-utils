@@ -32,7 +32,7 @@ module.exports = (API_TOKEN, HOOK_URL)->
         text:     message
         username: nick
         parse:    "full"
-        channel: channel
+        channel: "##{channel}"
 
   sendMessage: (message, to, as)->
     request.post
