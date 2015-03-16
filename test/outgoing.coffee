@@ -3,7 +3,7 @@ assert = require 'assert'
 
 api = slack(undefined, 'http://httpbin.org/post')
 
-it 'should post message perfectly', (done)->
+it 'should post message to channel', (done)->
   api.postMessage("Hello", "#general", "ghost")
   .on 'error', (err)->
     assert.fail 'TEST', 'TEST', "Request Failed"

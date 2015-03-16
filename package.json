@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "A collection of scripts for interacting with the various Slack APIs",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register --timeout 5s test/outgoing.coffee test/*.coffee",
+    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register --timeout 10s test/*.coffee",
     "prepublish": "./node_modules/.bin/coffee -c *.coffee"
   },
   "keywords": [

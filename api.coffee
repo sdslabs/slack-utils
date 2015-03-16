@@ -42,7 +42,7 @@ module.exports = (API_TOKEN, HOOK_URL)->
         username: as
         parse:    "full"
         channel: "@#{to}"
-  
+
   # exporting this to test the method
   listToHash: listToHash
   parseMessage: (message)->

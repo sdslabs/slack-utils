@@ -1,9 +1,10 @@
 request = require('request')
 WebSocket = require('ws')
 EventEmitter = require('events').EventEmitter
+rtm = new EventEmitter
+slackData = {}
 
 #eventemitter FTW!
-#we emit 2 events: active and away
 #parses an RTM event
 
 parseMessage = (msg) ->
@@ -15,10 +16,10 @@ parseMessage = (msg) ->
       return
     rtm.emit msg.presence, userIdToNick(msg.user)
   else if msg.type == 'hello'
-    console.log 'Connected to slack'
     rtm.emit 'ready'
   else
     rtm.emit msg.type, msg
+  rtm.emit '*', msg
   return
 
 #translates a slack unique userid to readable username
@@ -34,15 +35,11 @@ userIdToNick = (userid) ->
 #via the events
 
 sendInitialPresenceEvent = (users) ->
-  for i of users
-    `i = i`
-    user = users[i]
+  for user in users
     #again ignore the slackbot
     if user.id != 'USLACKBOT'
       rtm.emit user.presence, user.name
   return
-
-rtm = new EventEmitter
 
 module.exports = (API_TOKEN) ->
   #First call the rtm.start method of Slack API
@@ -61,6 +58,10 @@ module.exports = (API_TOKEN) ->
     ws = new WebSocket(json.url)
     #Sets up the callback for websocket messaging
     ws.on 'message', parseMessage
+    ws.on 'open', (socket)->
+      rtm.emit 'connect'
+    ws.on 'error', (err)->
+      rtm.emit 'error', err
     return
   #Return the eventemitter
   rtm
