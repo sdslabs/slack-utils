@@ -1,6 +1,6 @@
 {
   "name": "slack-utils",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A collection of scripts for interacting with the various Slack APIs",
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register --timeout 10s test/*.coffee",
