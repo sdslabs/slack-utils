@@ -66,7 +66,8 @@ This is not a one-to-one mapping for the various slack APIs. This is done for a 
 - Coffeescript is a development dependency, so its not installed in production
 - `ws` and `request` are used for websocket and http API usage
 - You will need to set an API token in environment to run tests
-  + `export API_TOKEN=xoxb-4059276139-J54hTmEgjJGWa0FAKE_TOKEN`
+- You can put one in a `.env` file with the following contents:
+  + `API_TOKEN=xoxb-4059276139-J54hTmEgjJGWa0FAKE_TOKEN`
 
 #Help Needed
 
