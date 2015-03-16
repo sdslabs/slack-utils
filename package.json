@@ -1,9 +1,9 @@
 {
   "name": "slack-utils",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A collection of scripts for interacting with the various Slack APIs",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register --timeout 10s test/*.coffee",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers coffee:coffee-script/register --timeout 10s test/*.coffee",
     "prepublish": "./node_modules/.bin/coffee -c *.coffee"
   },
   "keywords": [
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "coffee-script": "^1.9.1",
+    "dotenv": "^1.0.0",
     "mocha": "^2.2.1"
   }
 }

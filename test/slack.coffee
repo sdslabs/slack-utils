@@ -1,3 +1,4 @@
+require '../loadenv.coffee'
 slack = require "../api.coffee"
 assert = require "assert"
 

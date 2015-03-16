@@ -4,3 +4,4 @@ tests/
 .editorconfig
 .travis*
 npm-debug.log
+.env

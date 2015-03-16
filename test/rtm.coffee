@@ -1,3 +1,4 @@
+require '../loadenv.coffee'
 rtm = require('../rtm.coffee')(process.env.API_TOKEN)
 assert = require 'assert'
 
