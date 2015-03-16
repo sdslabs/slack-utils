@@ -5,3 +5,4 @@ tests/
 .travis*
 npm-debug.log
 .env
+*.sublime-workspace

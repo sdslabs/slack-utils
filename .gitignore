@@ -3,3 +3,4 @@ node_modules/
 tests/*.js
 npm-debug.log
 .env
+*.sublime-workspace
