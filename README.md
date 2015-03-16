@@ -17,6 +17,7 @@ Currently, utils consists of 2 modules: `api` and `rtm`. All possible methods ar
 ```js
 
 // Initialize api
+// You can leave either as undefined if you don't want to use those features
 api = require('slack-utils/api')('SLACK_API_TOKEN', 'INCOMING_HOOK_URL')
 
 // channel is the channel name (such as general)
@@ -28,7 +29,7 @@ api.sendMessage('message', 'nick', 'username')
 // Initialize rtm
 // You can get an API_TOKEN from https://api.slack.com/web for your personal account
 // Or by creating a bot user at https://my.slack.com/services/new/bot
-rtm = require('../rtm.coffee')(API_TOKEN);
+rtm = require('slack-utils/rtm')(API_TOKEN);
 
 rtm.on('event', function(msg){
   // Do whatever you want with the data
@@ -51,7 +52,7 @@ This is not a one-to-one mapping for the various slack APIs. This is done for a 
 
 * Simplicity. You should be able to use various APIs without having to worry about things like userid translation
 * Other 1-1 APIs already exist
-* We add extra events and methods to simplify usage. For eg, we include a `sendMessage` and a `postMessage` event to send a direct message or a public message. This is hidden inside the incoming webhook docs, but we surface it as 2 method calls.
+* We add extra events and methods to simplify usage. For eg, we include a `sendMessage` and a `postMessage` method to send a direct message or a public message. This is hidden inside the incoming webhook docs, but we surface it as 2 method calls.
 * The aim is to make your code more terse and readable.
 
 #Development
@@ -64,6 +65,8 @@ This is not a one-to-one mapping for the various slack APIs. This is done for a 
 - Only javascript is pushed to npm
 - Coffeescript is a development dependency, so its not installed in production
 - `ws` and `request` are used for websocket and http API usage
+- You will need to set an API token in environment to run tests
+  + `export API_TOKEN=xoxb-4059276139-J54hTmEgjJGWa0FAKE_TOKEN`
 
 #Help Needed
 
