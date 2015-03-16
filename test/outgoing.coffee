@@ -1,7 +1,8 @@
+require '../loadenv.coffee'
 slack = require '../api.coffee'
 assert = require 'assert'
 
-api = slack(undefined, 'http://httpbin.org/post')
+api = slack(process.env.API_TOKEN, 'http://httpbin.org/post')
 
 it 'should post message to channel', (done)->
   api.postMessage("Hello", "general", "ghost")
