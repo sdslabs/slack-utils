@@ -1,0 +1,31 @@
+{
+  "name": "slack-utils",
+  "version": "0.1.0",
+  "description": "A collection of scripts for interacting with the various Slack APIs",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register --timeout 5s test/outgoing.coffee test/*.coffee",
+    "prepublish": "coffee -c *.coffee"
+  },
+  "keywords": [
+    "slack",
+    "utils",
+    "api",
+    "rtm",
+    "bot"
+  ],
+  "author": "Abhay Rana <me@captnemo.in>",
+  "license": "MIT",
+  "dependencies": {
+    "coffee-script": "^1.9.1",
+    "request": "^2.53.0",
+    "ws": "^0.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/captn3m0/slack-utils.git"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.1",
+    "mocha": "^2.2.1"
+  }
+}
