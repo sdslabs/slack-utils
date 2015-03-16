@@ -20,4 +20,5 @@ wait_for_events = (cb)->
           cb_called = true
 
 it 'should expect all events to be emitted', (done)->
-  wait_for_events done
+  wait_for_events ()->
+    done()
