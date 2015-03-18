@@ -1,10 +1,13 @@
 request = require('request')
 
-listToHash = (list, keyName)->
+listToHash = (list, keyName, innerKey)->
   list = list[keyName]
   hash = {}
   for item in list
-    hash[item.id] = item.name
+    if innerKey?
+      hash[item.id] = item[innerKey]
+    else
+      hash[item.id] = item
   hash
 
 data = {}
@@ -12,11 +15,13 @@ data = {}
 getUsers = (token)->
   request.get {url: "https://slack.com/api/users.list?token=#{token}", json: true}, (err, res, users)->
     throw err if err
+    data['users.simple'] = listToHash users, "members", "name"
     data['users'] = listToHash users, "members"
 
 getChannels = (token)->
   request.get {url: "https://slack.com/api/channels.list?token=#{token}", json: true}, (err, res, channels)->
     throw err if err
+    data['channels.simple'] = listToHash channels, "channels", "name"
     data['channels'] = listToHash channels, "channels"
 
 module.exports = (API_TOKEN, HOOK_URL)->
@@ -51,8 +56,16 @@ module.exports = (API_TOKEN, HOOK_URL)->
       .replace("<!group>", "@group")
       .replace("<!everyone>", "@everyone")
       .replace /<#(C\w*)>/g, (match, channelId)->
-        "##{data['channels'][channelId]}"
+        "##{data['channels.simple'][channelId]}"
       .replace /<@(U\w*)>/g, (match, userId)->
-        "@#{data['users'][userId]}"
+        "@#{data['users.simple'][userId]}"
       .replace /<(\S*)>/g, (match, link)->
         link
+
+  userInfoById: (search_id)->
+    for id, info of data['users']
+      return info if search_id == id
+
+  userInfoByName: (username)->
+    for id, info of data['users']
+      return info if info['name'] == username
