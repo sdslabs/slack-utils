@@ -26,6 +26,9 @@ api = require('slack-utils/api')('SLACK_API_TOKEN', 'INCOMING_HOOK_URL')
 api.postMessage('message', 'channel', 'username')
 api.sendMessage('message', 'nick', 'username')
 
+info = api.UserInfoById('U025QJXBB') //returns cached user info
+info = api.UserInfoByName('nemo')    //returns cached user info
+
 // Initialize rtm
 // You can get an API_TOKEN from https://api.slack.com/web for your personal account
 // Or by creating a bot user at https://my.slack.com/services/new/bot
