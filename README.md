@@ -24,6 +24,13 @@ api = require('slack-utils/api')('SLACK_API_TOKEN', 'INCOMING_HOOK_URL')
 // nick is the username of the user to send the message to
 // username is the username used by the webhook
 api.postMessage('message', 'channel', 'username')
+
+// The icon can be set as final parameter in various ways (optional)
+api.postMessage('message', 'channel', 'username', ":ghost:")
+api.postMessage('message', 'channel', 'username', "ghost") // this is converted to an emoji
+api.postMessage('message', 'channel', 'username', "https://www.gravatar.com/avatar/e") // A valid image url
+
+// Sendmessage currently does not support icons
 api.sendMessage('message', 'nick', 'username')
 
 info = api.UserInfoById('U025QJXBB') //returns cached user info

@@ -28,3 +28,39 @@ it 'should post a DM', (done)->
       username: 'ghost',
       parse: 'full'
     done()
+
+it 'should parse emoji icons', (done)->
+  api.postMessage('message', 'general', 'slack', ':ghost:')
+  .on 'data', (res)->
+    json = JSON.parse(res.toString()).json
+    assert.deepEqual json,
+      channel: '#general',
+      text:  'message',
+      username: 'slack',
+      icon_emoji: ':ghost:'
+      parse: 'full'
+    done()
+
+it 'should parse url icons', (done)->
+  api.postMessage('message', 'general', 'slack', 'https://i.imgur.com/WNRjxyN.jpg')
+  .on 'data', (res)->
+    json = JSON.parse(res.toString()).json
+    assert.deepEqual json,
+      channel: '#general',
+      text:  'message',
+      username: 'slack',
+      icon_url: 'https://i.imgur.com/WNRjxyN.jpg'
+      parse: 'full'
+    done()
+
+it 'should parse invalid emoji icons', (done)->
+  api.postMessage('message', 'general', 'slack', 'flags')
+  .on 'data', (res)->
+    json = JSON.parse(res.toString()).json
+    assert.deepEqual json,
+      channel: '#general',
+      text:  'message',
+      username: 'slack',
+      icon_emoji: ':flags:'
+      parse: 'full'
+    done()

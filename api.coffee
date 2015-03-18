@@ -30,14 +30,27 @@ module.exports = (API_TOKEN, HOOK_URL)->
     getUsers(API_TOKEN)
     getChannels(API_TOKEN)
 
-  postMessage: (message, channel, nick)->
+  postMessage: (message, channel, nick, icon)->
+    data =
+      text: message
+      parse: "full"
+
+    if icon? and (icon[0..7] == 'https://' or icon[0..6] == 'http://')
+      data.icon_url = icon
+    # If icon is present and is not an emoji
+    else if icon? and not icon.match /^\:\w*\:$/
+      data.icon_emoji = ":#{icon}:"
+    # If icon is present and is an emoji
+    else if icon? and icon.match /^\:\w*\:$/
+      data.icon_emoji = icon
+    if channel?
+      data.channel = "##{channel}"
+    if nick?
+      data.username = nick
+
     request.post
       url: HOOK_URL
-      json:
-        text:     message
-        username: nick
-        parse:    "full"
-        channel: "##{channel}"
+      json: data
 
   sendMessage: (message, to, as)->
     request.post
