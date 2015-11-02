@@ -75,6 +75,9 @@ module.exports = (API_TOKEN, HOOK_URL)->
         "@#{data['users.simple'][userId]}"
       .replace /<(\S*)>/g, (match, link)->
         link
+      .replace /&amp;/g, "&"
+      .replace /&lt;/g, "<"
+      .replace /&gt;/g, ">"
 
   userInfoById: (search_id)->
     for id, info of data['users']
