@@ -13,5 +13,5 @@ it 'should return user info by name', (done)->
   , 4000
 
 it 'should return user info by id', ()->
-  info = api.userInfoById('U025QJXBB')
-  assert info.name == 'nemo'
+  info = api.userInfoById('U02K78YST')
+  assert info.name == 'mako'
