@@ -75,6 +75,8 @@ module.exports = (API_TOKEN, HOOK_URL)->
         "@#{data['users.simple'][userId]}"
       .replace /<(\S*)>/g, (match, link)->
         link
+      .replace /http(s)?:\/\/([^\s]*)\|([^\s]*)/g, (match, protocol, href1, href2) ->
+        return ("http" + (protocol||"") + "://" + href1) if href1 == href2
       .replace /&amp;/g, "&"
       .replace /&lt;/g, "<"
       .replace /&gt;/g, ">"
