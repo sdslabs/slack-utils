@@ -11,10 +11,7 @@ parseMessage = (msg) ->
   msg = JSON.parse(msg)
   #we are only interested in presence change
   if msg.type == 'presence_change'
-    #ignore the presence of slackbot
-    if msg.user == 'USLACKBOT'
-      return
-    rtm.emit msg.presence, userIdToNick(msg.user)
+    sendPresenceEvent msg
   else if msg.type == 'hello'
     rtm.emit 'ready'
   else
@@ -34,26 +31,29 @@ userIdToNick = (userid) ->
 #throw the initial data to the database
 #via the events
 
-sendInitialPresenceEvent = (users) ->
-  for user in users
-    #again ignore the slackbot
+sendPresenceEvent = (msg) ->
+  for user in msg.users
+    #ignore the slackbot
     if user.id != 'USLACKBOT'
-      rtm.emit user.presence, user.name
+      rtm.emit msg.presence, userIdToNick user
   return
+
+getPresenceSubscriptionJson = (users) ->
+  JSON.stringify
+    type: "presence_sub"
+    ids: users.map (user) -> user.id
 
 module.exports = (API_TOKEN) ->
   #First call the rtm.start method of Slack API
-  request.get {
-    url: 'https://slack.com/api/rtm.start?token=' + API_TOKEN
+  request.get
+    url: 'https://slack.com/api/rtm.start?batch_presence_aware=1&token=' + API_TOKEN
     json: true
-  }, (err, res, json) ->
+  , (err, res, json) ->
     if err
       throw err
     #This is the initial response data with a lot of interesting keys
     #So we store it as well
     slackData = json
-    #Emit events for initial data
-    sendInitialPresenceEvent slackData.users
     #Connect the websocket
     ws = new WebSocket(json.url)
     #Sets up the callback for websocket messaging
@@ -62,6 +62,8 @@ module.exports = (API_TOKEN) ->
       rtm.emit 'connect'
     ws.on 'error', (err)->
       rtm.emit 'error', err
+    rtm.on 'ready', () ->
+      ws.send getPresenceSubscriptionJson slackData.users
     return
   #Return the eventemitter
   rtm
