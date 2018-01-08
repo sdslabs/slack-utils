@@ -1,16 +1,16 @@
-#slack-utils [![Build Status](https://travis-ci.org/captn3m0/slack-utils.svg?branch=master)](https://travis-ci.org/captn3m0/slack-utils)
+# slack-utils [![Build Status](https://travis-ci.org/captn3m0/slack-utils.svg?branch=master)](https://travis-ci.org/captn3m0/slack-utils)
 
 This is a collection of various slack-api related scripts that I've written. Published as an npm module.
 
 Development is done in coffeescript, but that is not a dependency for usage.
 
-#Installation
+# Installation
 
     npm install --save slack-utils
 
 [![NPM](https://nodei.co/npm/slack-utils.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/slack-utils/)
 
-#Usage
+# Usage
 
 Currently, utils consists of 2 modules: `api` and `rtm`. All possible methods are demonstrated below:
 
@@ -56,7 +56,7 @@ rtm.on('event', function(msg){
   * `away`: When a user's presence changes to away
   * `*`: Emitted for all slack-events (not for 3 low-level events: connect, ready, and error)
 
-#Differences
+# Differences
 
 This is not a one-to-one mapping for the various slack APIs. This is done for a reason:
 
@@ -65,7 +65,7 @@ This is not a one-to-one mapping for the various slack APIs. This is done for a 
 * We add extra events and methods to simplify usage. For eg, we include a `sendMessage` and a `postMessage` method to send a direct message or a public message. This is hidden inside the incoming webhook docs, but we surface it as 2 method calls.
 * The aim is to make your code more terse and readable.
 
-#Development
+# Development
 
 - Code is written in coffeescript
 - Editorconfig is used for indentation guidelines
@@ -79,7 +79,7 @@ This is not a one-to-one mapping for the various slack APIs. This is done for a 
 - You can put one in a `.env` file with the following contents:
   + `API_TOKEN=xoxb-4059276139-J54hTmEgjJGWa0FAKE_TOKEN`
 
-#Help Needed
+# Help Needed
 
 * Since I am pretty used to the slack API by now, I am very much comfortable writing this.
 * I'd love if people used this for their services.
@@ -87,6 +87,6 @@ This is not a one-to-one mapping for the various slack APIs. This is done for a 
 * I am not used to writing javascript APIs, so I'd love to hear thoughts on how this can be improved
 * Documentation. I'd get around to it soon, but I'd love a helping hand. Will probably use docco.
 
-#License
+# License
 
 Licensed under [MIT](http://nemo.mit-license.org/)
