@@ -3,7 +3,7 @@
   "version": "0.3.2",
   "description": "A collection of scripts for interacting with the various Slack APIs",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha --require coffeescript/register --timeout 10s test/*.coffee",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --exit --require coffeescript/register --timeout 10s test/*.coffee",
     "prepublish": "./node_modules/.bin/coffee -c *.coffee"
   },
   "keywords": [
