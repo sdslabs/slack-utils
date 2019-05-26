@@ -17,16 +17,16 @@
   "license": "MIT",
   "dependencies": {
     "request": "^2.88.0",
-    "ws": "^6.1.4"
+    "ws": "^7.0.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/captn3m0/slack-utils.git"
   },
   "devDependencies": {
-    "coffeescript": "^2.3.2",
+    "coffeescript": "^2.4.1",
     "deep-equal": "^1.0.1",
-    "dotenv": "^6.2.0",
-    "mocha": "^6.0.0"
+    "dotenv": "^8.0.0",
+    "mocha": "^6.1.4"
   }
 }
