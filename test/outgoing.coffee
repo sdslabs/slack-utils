@@ -2,16 +2,15 @@ require '../loadenv.coffee'
 slack = require '../api.coffee'
 assert = require 'assert'
 
-api = slack(process.env.API_TOKEN, 'http://httpbin.org/post')
-
+api = slack(process.env.API_TOKEN, 'https://httpbin.org/post')
 it 'should post message to channel', (done)->
   api.postMessage("Hello", "general", "ghost")
   .on 'error', (err)->
     assert.fail 'TEST', 'TEST', "Request Failed"
     done()
   .on 'data', (res)->
-    json = JSON.parse(res.toString()).json
-    assert.deepEqual json,
+    j = JSON.parse(res.toString())['json']
+    assert.deepEqual j,
       channel: '#general',
       text:  'Hello',
       username: 'ghost',
@@ -21,8 +20,8 @@ it 'should post message to channel', (done)->
 it 'should post a DM', (done)->
   api.sendMessage('Message', 'nemo', 'ghost')
   .on 'data', (res)->
-    json = JSON.parse(res.toString()).json
-    assert.deepEqual json,
+    j = JSON.parse(res.toString())['json']
+    assert.deepEqual j,
       channel: '@nemo',
       text:  'Message',
       username: 'ghost',
@@ -32,8 +31,8 @@ it 'should post a DM', (done)->
 it 'should parse emoji icons', (done)->
   api.postMessage('message', 'general', 'slack', ':ghost:')
   .on 'data', (res)->
-    json = JSON.parse(res.toString()).json
-    assert.deepEqual json,
+    j = JSON.parse(res.toString())['json']
+    assert.deepEqual j,
       channel: '#general',
       text:  'message',
       username: 'slack',
@@ -41,11 +40,12 @@ it 'should parse emoji icons', (done)->
       parse: 'full'
     done()
 
+
 it 'should parse url icons', (done)->
   api.postMessage('message', 'general', 'slack', 'https://i.imgur.com/WNRjxyN.jpg')
   .on 'data', (res)->
-    json = JSON.parse(res.toString()).json
-    assert.deepEqual json,
+    j = JSON.parse(res.toString())['json']
+    assert.deepEqual j,
       channel: '#general',
       text:  'message',
       username: 'slack',
@@ -56,8 +56,8 @@ it 'should parse url icons', (done)->
 it 'should parse invalid emoji icons', (done)->
   api.postMessage('message', 'general', 'slack', 'flags')
   .on 'data', (res)->
-    json = JSON.parse(res.toString()).json
-    assert.deepEqual json,
+    j = JSON.parse(res.toString())['json']
+    assert.deepEqual j,
       channel: '#general',
       text:  'message',
       username: 'slack',
