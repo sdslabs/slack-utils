@@ -17,35 +17,35 @@ Currently, utils consists of 2 modules: `api` and `rtm`. All possible methods ar
 ```js
 // Initialize api
 // You can leave either as undefined if you don't want to use those features
-api = require('slack-utils/api')('SLACK_API_TOKEN', 'INCOMING_HOOK_URL');
+api = require("slack-utils/api")("SLACK_API_TOKEN", "INCOMING_HOOK_URL");
 
 // channel is the channel name (such as general)
 // nick is the username of the user to send the message to
 // username is the username used by the webhook
-api.postMessage('message', 'channel', 'username');
+api.postMessage("message", "channel", "username");
 
 // The icon can be set as final parameter in various ways (optional)
-api.postMessage('message', 'channel', 'username', ':ghost:');
-api.postMessage('message', 'channel', 'username', 'ghost'); // this is converted to an emoji
+api.postMessage("message", "channel", "username", ":ghost:");
+api.postMessage("message", "channel", "username", "ghost"); // this is converted to an emoji
 api.postMessage(
-  'message',
-  'channel',
-  'username',
-  'https://www.gravatar.com/avatar/e'
+  "message",
+  "channel",
+  "username",
+  "https://www.gravatar.com/avatar/e"
 ); // A valid image url
 
 // Sendmessage currently does not support icons
-api.sendMessage('message', 'nick', 'username');
+api.sendMessage("message", "nick", "username");
 
-info = api.UserInfoById('U025QJXBB'); //returns cached user info
-info = api.UserInfoByName('nemo'); //returns cached user info
+info = api.UserInfoById("U025QJXBB"); //returns cached user info
+info = api.UserInfoByName("nemo"); //returns cached user info
 
 // Initialize rtm
 // You can get an API_TOKEN from https://api.slack.com/web for your personal account
 // Or by creating a bot user at https://my.slack.com/services/new/bot
-rtm = require('slack-utils/rtm')(API_TOKEN);
+rtm = require("slack-utils/rtm")(API_TOKEN);
 
-rtm.on('event', function(msg) {
+rtm.on("event", function(msg) {
   // Do whatever you want with the data
   // msg.type will be same as event name
 });
@@ -93,4 +93,4 @@ This is not a one-to-one mapping for the various slack APIs. This is done for a 
 
 # License
 
-Licensed under [MIT](http://nemo.mit-license.org/)
+Licensed under [MIT](https://nemo.mit-license.org/). See LICENSE file for complete text.
